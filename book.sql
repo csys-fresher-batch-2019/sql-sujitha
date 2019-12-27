@@ -39,5 +39,6 @@ constraint user_name_uq unique(user_name,book1_id,ordered_date)
 );
 insert into orders(order_id,user_name,book1_id,total_amount,qty,status,comments)values
 (1,'nivi',1,200,1,'delivered','yes');
-select * from orders
+select * from orders;
+ select book_name,((select sum(qty) from orders where book1_id=b.book_id)) from book b;                          
 
