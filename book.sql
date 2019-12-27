@@ -81,3 +81,4 @@ insert into order_items(item_id,order_id,books_id,qanty,status) values(1,1,01,3,
 insert into order_items(item_id,order_id,books_id,qanty,status) values(2,2,01,5,'completed');
 insert into order_items(item_id,order_id,books_id,qanty,status) values(3,2,02,3,'completed');
 select *from order_items;
+select qanty from stocks where books_id=101;
