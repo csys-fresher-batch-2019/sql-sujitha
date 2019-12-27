@@ -43,8 +43,8 @@ select * from orders;
  select book_name,((select sum(qty) from orders where book1_id=b.book_id)) from book b;                          
 
 
-                           
-                           create table collection 
+
+create table collection 
 (
 books_id number,
 book_tittle varchar2(50) not null,
@@ -66,3 +66,18 @@ constraint qanty_ck check(qanty>0)
  insert into stocks(stock_no,stock_id,qanty)values(01,101,10);
 insert into stocks(stock_no,stock_id,qanty)values(02,102,5);
 select * from stocks;                         
+
+create table order_items
+(
+item_id number not null,
+order_id number not null,
+books_id number not null,
+qanty number not null ,
+status varchar2(50) not null,
+constraint orders_id_fk foreign key(order_id)references collection(books_id),
+constraint status_ck check(status in('completed','cancel'))
+);
+insert into order_items(item_id,order_id,books_id,qanty,status) values(1,1,01,3,'completed');
+insert into order_items(item_id,order_id,books_id,qanty,status) values(2,2,01,5,'completed');
+insert into order_items(item_id,order_id,books_id,qanty,status) values(3,2,02,3,'completed');
+select *from order_items;
