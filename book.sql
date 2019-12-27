@@ -63,3 +63,6 @@ qanty number not null,
 constraint bookk_id_fk foreign key(book_id)references collection(books_id),
 constraint qanty_ck check(qanty>0)
 );
+ insert into stocks(stock_no,stock_id,qanty)values(01,101,10);
+insert into stocks(stock_no,stock_id,qanty)values(02,102,5);
+select * from stocks;                         
