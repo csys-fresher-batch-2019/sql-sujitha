@@ -42,3 +42,24 @@ insert into orders(order_id,user_name,book1_id,total_amount,qty,status,comments)
 select * from orders;
  select book_name,((select sum(qty) from orders where book1_id=b.book_id)) from book b;                          
 
+
+                           
+                           create table collection 
+(
+books_id number,
+book_tittle varchar2(50) not null,
+price number not null,
+constraint books_id_pk primary key(books_id)
+);
+insert into collection(books_id,book_tittle,price) values (01,'c',100);
+insert into collection(books_id,book_tittle,price) values (02,'java',200);
+select * from collection;
+
+create  table stocks
+(
+stock_no number not null,
+book_id number,
+qanty number not null,
+constraint bookk_id_fk foreign key(book_id)references collection(books_id),
+constraint qanty_ck check(qanty>0)
+);
