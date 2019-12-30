@@ -18,10 +18,11 @@
  insert into buslist(bus_num,bus_name)values(103,'AVK');
  insert into buslist(bus_num,bus_name)values(104,'SRM');
  insert into buslist(bus_num,bus_name)values(105,'SRS');
- Query:
+
+Query:
  select * from buslist;
  
-  
+  ### feature 2:list bus
 
  create table busroutes
 (
