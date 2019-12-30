@@ -1,7 +1,10 @@
 # Bus ticket booking
+
 *http://busapp.in
+
 ## Features
 * user should be able to view all buses
+
 ###Feature 1:List all buses
  
  create table buslist
