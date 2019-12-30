@@ -1,0 +1,63 @@
+ Bus tic booking
+ Table 1-Buses
+create table buses
+(
+s_no number not null,
+from_location varchar2(50) not null,
+to_location varchar2(50) not null,
+j_date date not null,
+bus_no number not null,
+constraint bus_no_pk primary key(bus_no)
+);
+insert into buses(s_no,from_location,to_location,j_date,bus_no)values(1,'chennai','kovilpatti',to_date('2019/12/12','YYYY/MM/DD'),101);
+insert into buses(s_no,from_location,to_location,j_date,bus_no)values(2,'chennai','kovilpatti',to_date('2019/12/12','YYYY/MM/DD'),102);
+insert into buses(s_no,from_location,to_location,j_date,bus_no)values(3,'chennai','kovilpatti',to_date('2019/12/12','YYYY/MM/DD'),103);
+insert into buses(s_no,from_location,to_location,j_date,bus_no)values(4,'chennai','kovilpatti',to_date('2019/12/12','YYYY/MM/DD'),104);
+insert into buses(s_no,from_location,to_location,j_date,bus_no)values(5,'chennai','kovilpatti',to_date('2019/12/12','YYYY/MM/DD'),105);
+
+select * from buses;
+
+BUSLIST
+
+ create table buslist
+ (
+ bus_no number not null,
+ bus_name varchar2(50) not null,
+ fair number not null,
+ constraint bus_name_uq unique(bus_name),
+ constraint fair_uq unique(fair)
+ );
+ insert into buslist(bus_no,bus_name,fair)values(101,'TAT',800);
+ insert into buslist(bus_no,bus_name,fair)values(102,'VTAT',850);
+ insert into buslist(bus_no,bus_name,fair)values(103,'AVK',750);
+ insert into buslist(bus_no,bus_name,fair)values(104,'SRM',1000);
+ insert into buslist(bus_no,bus_name,fair)values(105,'SRS',1200);
+ select * from buslist;
+ 
+ BUS DETAILS
+
+create table busdetails
+(
+bus_no number not null,
+bus_name varchar2(50) not null,
+start_time varchar2(30) not null,
+stop_time varchar2(30) not null,
+no_of_seats number not null,
+available_seats number not null,
+seat_type varchar2(50) not null,
+fair number not null,
+constraint bus_name_uq unique(bus_name),
+constraint start_time_uq unique(start_time,stop_time),
+constraint fair_uq unique(fair)
+);
+insert into busdetails(bus_no,bus_name,start_time,stop_time,no_of_seats,available_seats,seat_type,fair)values
+(101,'TAT',('9:10:00'),('5:10:00'),40,20,'sleeper',800);
+insert into busdetails(bus_no,bus_name,start_time,stop_time,no_of_seats,available_seats,seat_type,fair)values
+(102,'VTAT',('8:15:00'),('5:00:00'),45,25,'seater',850);
+insert into busdetails(bus_no,bus_name,start_time,stop_time,no_of_seats,available_seats,seat_type,fair)values
+(103,'AVK',('9:30:00'),('5:45:00'),50,28,'sleeper&seater',750);
+insert into busdetails(bus_no,bus_name,start_time,stop_time,no_of_seats,available_seats,seat_type,fair)values
+(104,'SRM',('10:30:00'),('6:30:00'),60,15,'sleeper',1000);
+insert into busdetails(bus_no,bus_name,start_time,stop_time,no_of_seats,available_seats,seat_type,fair)values
+(105,'SRS',('8:10:00'),('5:20:00'),52,10,'sleeper',1200);
+select * from busdetails;
