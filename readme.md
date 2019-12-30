@@ -6,7 +6,7 @@
 * user should be able to view all buses
 
 ### Feature 1:List all buses
-'''sql
+```sql
  
  create table buslist
  (
@@ -14,15 +14,18 @@
  bus_name varchar2(50) not null,
  constraint bus_num_pk primary key(bus_num)
  );
- '''
+ ```
+ ```sql
  insert into buslist(bus_num,bus_name)values(101,'TAT');
  insert into buslist(bus_num,bus_name)values(102,'VTAT');
  insert into buslist(bus_num,bus_name)values(103,'AVK');
  insert into buslist(bus_num,bus_name)values(104,'SRM');
  insert into buslist(bus_num,bus_name)values(105,'SRS');
-
+```
+```sql
 Query:
  select * from buslist;
+ ```
  
   ### feature 2:list bus
 
