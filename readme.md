@@ -1,7 +1,8 @@
-table 1
-
-BUSLIST
-
+# Bus ticket booking
+*http://busapp.in
+## Features
+* user should be able to view all buses
+###Feature 1:List all buses
  
  create table buslist
  (
@@ -14,10 +15,10 @@ BUSLIST
  insert into buslist(bus_num,bus_name)values(103,'AVK');
  insert into buslist(bus_num,bus_name)values(104,'SRM');
  insert into buslist(bus_num,bus_name)values(105,'SRS');
+ Query:
  select * from buslist;
  
   
-BUS ROUTES
 
  create table busroutes
 (
