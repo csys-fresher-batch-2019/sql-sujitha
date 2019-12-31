@@ -49,6 +49,7 @@ insert into busroutes(route_no,from_location,to_location,j_date,bus_num)values(4
 insert into busroutes(route_no,from_location,to_location,j_date,bus_num)values(5,'chennai','kovilpatti',to_date('12/12/2019','DD/MM/YYYY'),105);
 ```
 query:
+
 select * from busroutes;
 ```
 
