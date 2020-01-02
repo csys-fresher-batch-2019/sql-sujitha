@@ -143,6 +143,73 @@ drop table user_details;
  drop table ticket_booking;
  commit;
 ```
+### Query:
+```sql
+ 1.To display all available seats
+ select   bl.no_of_seats-sum(tb.no_of_seats_booked)  available_seats from
+buslist bl,ticket_booking tb,busdetails bd where bl.bus_num=bd.bus_num and bd.travel_id=tb.travel_id and tb.travel_id=10
+group by bl.no_of_seats,tb.travel_id
+```
+```sql
+    2.To display all available seats along with travel_id and no:
+            select   tb.travel_id,bl.no_of_seats,bl.no_of_seats-sum(tb.no_of_seats_booked)  available_seats from
+buslist bl,ticket_booking tb,busdetails bd where bl.bus_num=bd.bus_num and bd.travel_id=tb.travel_id --and tb.travel_id=10
+group by bl.no_of_seats,tb.travel_id
+```
+```sql
+   3.To update available of seats by using travel id:
+            update busdetails bd1 set bd1.available_seats =(select  bl.no_of_seats-sum(tb.no_of_seats_booked)  available_seats from
+buslist bl,ticket_booking tb,busdetails bd where bl.bus_num=bd.bus_num and bd.travel_id=tb.travel_id and tb.travel_id=30
+group by bl.no_of_seats,tb.travel_id )where bd1.travel_id=30;
+```
+```sql
+   4. TO display all user details to give travelid :
+             select bl.bus_num,bl.bus_name,bl.no_of_seats,bl.seat_type,bd.fair,ud.user_name,
+sum(tb.no_of_seats_booked)booked_seats,tb.j_date,tb.booked_date
+from buslist bl,busdetails bd,ticket_booking tb,busroutes br,
+user_details ud where bl.bus_num=bd.bus_num and bd.travel_id=tb.travel_id 
+and br.route_no=bd.route_no and ud.user_id=tb.user_id and tb.travel_id=10 group by 
+bl.bus_num,bl.bus_name,bl.no_of_seats,bl.seat_type,bd.fair,ud.user_name,tb.j_date,tb.booked_date;
+```
+```sql
+   5.To display bus_name by using to_location:
+              select bus_name from buslist where bus_num=(select bus_num from busdetails where route_no =
+(select route_no from busroutes where to_location='Kovilpatti'));
+```
+```sql
+   6.To give the total payment from booking seats:
+          select sum(payment) from ticket_booking where status='booked';
+```
+```sql
+   7.To display the females count:
+           select count (*) from user_details where user_gender='F';
+```
+```sql
+   8. To display the total no seats booked:
+             select booked_date,count(no_of_seats_booked)as total_seats from ticket_booking where  status='booked' group by no_of_seats_booked,booked_date; 
+```
+```sql
+   9.To update the status: 
+            update ticket_booking set status='booked'where travel_id=(select travel_id from busdetails where bus_num=
+(select bus_num from buslist where bus_name='VTAT'));
+select status  from ticket_booking where travel_id=20;
+```
+```sql
+   10.To display the busname and fair by using joins:
+            select buslist.bus_name, busdetails.fair from buslist inner join busdetails on buslist.bus_num = busdetails.bus_num;
+```
+```sql
+  11.to display the bus details:
+           select buslist.bus_name,buslist.no_of_seats, busdetails.fair,busdetails.available_seats from buslist  left join busdetails on buslist.bus_num = busdetails.bus_num;
+```
+```sql
+12.To display the fair details:
+select fair from busdetails order by fair desc;
+```
+
+ 
+
+   
 
 
 
