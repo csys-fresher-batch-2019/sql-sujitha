@@ -79,7 +79,7 @@ insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_tim
 insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
 (30,3,103,to_date('14-01-2020','DD-MM-YYYY'),('10:10:00,pm'),('5:30:00,am'),750,30);
 ```
-query
+query:
 ```sql
 select * from busdetails;
 drop table busdetails;
