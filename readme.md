@@ -84,7 +84,31 @@ query:
 select * from busdetails;
 drop table busdetails;
 ```
+### Feature 4:Liat all the User_details
+```sql
 
+create table user_details
+(
+user_id number not null,
+user_name varchar2(50) not null,
+user_phn_num number(10) not null,
+user_gender varchar2(50)not null,
+constraint user_id_pk primary key(user_id),
+constraint user_phn_num_uq unique(user_phn_num),
+constraint user_gender_ck check(user_gender in('M','F')),
+constraint user_phn_num_ck check(length(To_char(user_phn_num))=10)
+);
+```
+```sql
+insert into user_details(user_id,user_name,user_phn_num,user_gender)values(11,'suji',9876543290,'F');
+insert into user_details(user_id,user_name,user_phn_num,user_gender)values(12,'siva',8765493243,'M');
+insert into user_details(user_id,user_name,user_phn_num,user_gender)values(13,'nivi',7896547895,'F');
+```
+query:
+```sql
+select * from user_details;
+drop table user_details;
+```
 
 
 
