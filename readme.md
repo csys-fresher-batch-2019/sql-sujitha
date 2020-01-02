@@ -27,7 +27,7 @@ Query:
  select * from buslist;
  ```
  
-  ### feature 2:list out the busroutes
+  ### feature 2:list all the busroutes
 ```sql
 create table busroutes
 (
@@ -52,6 +52,39 @@ query:
 ```sql
 select * from busroutes;
 ```
+ ### Feature 3: List all the Busdetails
+ ```sql
+ create table busdetails
+(
+travel_id number not null,
+route_no number not null,
+bus_num number not null,
+travel_date date not null,
+start_time varchar2(50) not null,
+end_time varchar2(50) not null,
+fair number not null,
+available_seats number not null,
+constraint travel_id_pk primary key(travel_id),
+constraint route_no_fk foreign key(route_no) references busroutes(route_no),
+constraint bus_num_fk foreign key(bus_num)references buslist(bus_num),
+constraint fair_ck check(fair>0),
+constraint available_seats_ck check(available_seats>0)
+);
+```
+```sql
+insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
+(10,1,101,to_date('14-01-2020','DD-MM-YYYY'),('9:10:00,pm'),('5:10:00,am'),800,20);
+insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
+(20,2,102,to_date('14-01-2020','DD-MM-YYYY'),('9:30:00,pm'),('6:00:00,am'),850,25);
+insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
+(30,3,103,to_date('14-01-2020','DD-MM-YYYY'),('10:10:00,pm'),('5:30:00,am'),750,30);
+```
+query
+```sql
+select * from busdetails;
+drop table busdetails;
+```
+
 
 
 
