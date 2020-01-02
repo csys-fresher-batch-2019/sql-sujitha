@@ -109,7 +109,40 @@ query:
 select * from user_details;
 drop table user_details;
 ```
+### Feature 5:Ticket booking
+```sql
 
+ create table ticket_booking
+ (
+ travel_id number not null,
+ no_of_seats_booked number not null,
+ user_id number not null,
+ fair number not null,
+ j_date date not null,
+ booked_date date not null,
+ payment number not null,
+ status varchar2(50) not null,
+ constraint travel_id_fk foreign key(travel_id)references busdetails(travel_id),
+ constraint booked_date_ckk check(j_date>=booked_date),
+ constraint status_ckk check(status in('booked','cancelled')),
+ constraint payment_ck check(payment>0)
+  );
+  ```
+  ```sql
+ insert into ticket_booking(travel_id,no_of_seats_booked,user_id,fair,j_date,booked_date,payment,status)values
+ (10,1,11,800,to_date('14_01_2020','DD-MM-YYYY'),to_date('10/12/2019','DD/MM/YYYY'),800,'booked');
+ insert into ticket_booking(travel_id,no_of_seats_booked,user_id,fair,j_date,booked_date,payment,status)values
+ (20,1,12,850,to_date('14-01-2020','DD-MM-YYYY'),to_date('20/12/2019','DD/MM/YYYY'),850,'cancelled');
+ insert into ticket_booking(travel_id,no_of_seats_booked,user_id,fair,j_date,booked_date,payment,status)values
+ (30,1,13,750,to_date('14-01-2020','DD-MM-YYYY'),to_date('15/12/2019','DD/MM/YYYY'),700,'booked');
+ ```
+ query:
+ ```sql
+  
+ select * from ticket_booking;
+ drop table ticket_booking;
+ commit;
+```
 
 
 
