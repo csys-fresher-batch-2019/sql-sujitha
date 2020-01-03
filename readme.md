@@ -7,21 +7,20 @@
 
 ### Feature 1:List all buses
 ```sql
- 
- create table buslist
+create table buslist
  (
  bus_num number,
  bus_name varchar2(50) not null,
- constraint bus_num_pk primary key(bus_num)
+ no_of_seats number not null,
+ seat_type varchar2(50) not null,
+ constraint bus_num_pkk primary key(bus_num),
+ constraint seat_type_ckk check(seat_type in('seater','sleeper'))
  );
- ```
+  ```
  ```sql
- insert into buslist(bus_num,bus_name)values(101,'TAT');
- insert into buslist(bus_num,bus_name)values(102,'VTAT');
- insert into buslist(bus_num,bus_name)values(103,'AVK');
- insert into buslist(bus_num,bus_name)values(104,'SRM');
- insert into buslist(bus_num,bus_name)values(105,'SRS');
-```
+ insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(101,'TAT',40,'seater');
+ insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(102,'VTAT',50,'sleeper');
+ insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(103,'AVK',60,'seater');
 ```sql
 Query:
  select * from buslist;
