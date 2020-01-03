@@ -172,7 +172,7 @@ drop table user_details;
 ```sql
 | travel_id | no_of_seats_booked | user_id | fair | j_date   | booked_date | payment | status    |
 |-----------|--------------------|---------|------|----------|-------------|---------|-----------|
-| 10        | 20	| 11      | 800  | 14-01-20 | 10-12-19    | 800     | booked    |
+| 10        | 20                	| 11      | 800  | 14-01-20 | 10-12-19    | 800     | booked    |
 | 20        | 1                  | 12      | 850  | 14-01-20 | 20-12-19    | 850     | cancelled |
 ```
 ### Query:
