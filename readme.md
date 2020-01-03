@@ -26,6 +26,12 @@
 Query:
  select * from buslist;
  ```
+ ```sql
+| bus_num | bus_name | no_of_seats | seat_type |
+|---------|----------|-------------|-----------|
+| 101     | TAT      | 40          | seater    |
+| 102     | VTAT     | 50          | sleeper   |
+```
  
   ### feature 2:list all the busroutes
 ```sql
@@ -51,6 +57,12 @@ insert into busroutes(route_no,from_location,to_location,j_date,bus_num)values(5
 query:
 ```sql
 select * from busroutes;
+```
+```sql
+| route_no | from_location | to_location |
+|----------|---------------|-------------|
+| 1        | chennai       | Kovilpatti  |
+| 2        | chennai       | Madurai     |
 ```
  ### Feature 3: List all the Busdetails
  ```sql
@@ -84,6 +96,13 @@ query:
 select * from busdetails;
 drop table busdetails;
 ```
+```sql
+
+| travel_id | route_no | bus_num | travel_date | start_time | end_time   | fair | available_seats |
+|-----------|----------|---------|-------------|------------|------------|------|-----------------|
+| 10        | 1        | 101     | 14-01-20    | 9:10:00,pm | 5:10:00,am | 800  | 20              |
+| 20        | 2        | 102     | 14-01-20    | 9:30:00,pm | 6:00:00,am | 850  | 25              |
+```
 ### Feature 4:Liat all the User_details
 ```sql
 
@@ -108,6 +127,13 @@ query:
 ```sql
 select * from user_details;
 drop table user_details;
+```
+```sql
+
+| user_id | user_name | user_phn_num | user_gender |
+|---------|-----------|--------------|-------------|
+| 11      | suji      | 9876543290   | F           |
+| 12      | siva      | 8765493243   | M           |
 ```
 ### Feature 5:Ticket booking
 ```sql
@@ -142,6 +168,12 @@ drop table user_details;
  select * from ticket_booking;
  drop table ticket_booking;
  commit;
+```
+```sql
+| travel_id | no_of_seats_booked | user_id | fair | j_date   | booked_date | payment | status    |
+|-----------|--------------------|---------|------|----------|-------------|---------|-----------|
+| 10        | 20		               | 11      | 800  | 14-01-20 | 10-12-19    | 800     | booked    |
+| 20        | 1                  | 12      | 850  | 14-01-20 | 20-12-19    | 850     | cancelled |
 ```
 ### Query:
 ```sql
