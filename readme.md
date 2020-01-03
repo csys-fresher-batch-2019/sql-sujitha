@@ -285,7 +285,7 @@ select status  from ticket_booking where travel_id=20;
 select fair from busdetails order by fair desc;
 ```
 
- 
+ .
 
    
 
