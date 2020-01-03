@@ -183,16 +183,34 @@ buslist bl,ticket_booking tb,busdetails bd where bl.bus_num=bd.bus_num and bd.tr
 group by bl.no_of_seats,tb.travel_id
 ```
 ```sql
+| available_seats |
+|-----------------|
+| 33              |
+```
+
+```sql
     2.To display all available seats along with travel_id and no:
             select   tb.travel_id,bl.no_of_seats,bl.no_of_seats-sum(tb.no_of_seats_booked)  available_seats from
 buslist bl,ticket_booking tb,busdetails bd where bl.bus_num=bd.bus_num and bd.travel_id=tb.travel_id --and tb.travel_id=10
 group by bl.no_of_seats,tb.travel_id
 ```
 ```sql
+| travel_id | no_of_seats | available_seats |
+|-----------|-------------|-----------------|
+| 10        | 40          | 33              |
+| 20        | 50          | 49              |
+| 30        | 60          | 59              |
+```
+```sql
    3.To update available of seats by using travel id:
             update busdetails bd1 set bd1.available_seats =(select  bl.no_of_seats-sum(tb.no_of_seats_booked)  available_seats from
 buslist bl,ticket_booking tb,busdetails bd where bl.bus_num=bd.bus_num and bd.travel_id=tb.travel_id and tb.travel_id=30
 group by bl.no_of_seats,tb.travel_id )where bd1.travel_id=30;
+```
+```sql
+| travel_id | route_no | bus_num | travel_date | start_time  | end_time   | fair | available_seats |
+|-----------|----------|---------|-------------|-------------|------------|------|-----------------|
+| 30        | 3        | 103     | 14-01-20    | 10:10:00,pm | 5:30:00,am | 750  | 59              |
 ```
 ```sql
    4. TO display all user details to give travelid :
@@ -204,21 +222,49 @@ and br.route_no=bd.route_no and ud.user_id=tb.user_id and tb.travel_id=10 group 
 bl.bus_num,bl.bus_name,bl.no_of_seats,bl.seat_type,bd.fair,ud.user_name,tb.j_date,tb.booked_date;
 ```
 ```sql
+| bus_num | bus_name | no_of_seats | seat_type | fair | user_name | booked_seats | j_date   | booked_date |
+|---------|----------|-------------|-----------|------|-----------|--------------|----------|-------------|
+| 101     | TAT      | 40          | seater    | 800  | suji      | 2            | 14-01-20 | 10-12-19    |
+| 101     | TAT      | 40          | seater    | 800  | nivi      | 5            | 14-01-20 | 15-12-19    |
+```
+```sql
    5.To display bus_name by using to_location:
               select bus_name from buslist where bus_num=(select bus_num from busdetails where route_no =
 (select route_no from busroutes where to_location='Kovilpatti'));
+```
+```sql
+| bus_name |
+|----------|
+| TAT      |
 ```
 ```sql
    6.To give the total payment from booking seats:
           select sum(payment) from ticket_booking where status='booked';
 ```
 ```sql
+| Payment |
+|---------|
+| 6300    |
+```
+```sql
    7.To display the females count:
            select count (*) from user_details where user_gender='F';
 ```
 ```sql
+| count |
+|-------|
+| 2     |
+```
+```sql
    8. To display the total no seats booked:
              select booked_date,count(no_of_seats_booked)as total_seats from ticket_booking where  status='booked' group by no_of_seats_booked,booked_date; 
+```
+```sql
+| booked_date | total_seat |
+|-------------|------------|
+| 10-12-19    | 2          |
+| 15-12-19    | 1          |
+| 15-12-19    | 1          |
 ```
 ```sql
    9.To update the status: 
