@@ -167,12 +167,8 @@ constraint booking_gender_preferences_ck check(gender_preferences in ('yes','no'
 create sequence booked_id start with 1;
   ```
   ```sql
- insert into ticket_booking(travel_id,no_of_seats_booked,user_id,fair,j_date,booked_date,payment,status)values
- (10,1,11,800,to_date('14_01_2020','DD-MM-YYYY'),to_date('10/12/2019','DD/MM/YYYY'),800,'booked');
- insert into ticket_booking(travel_id,no_of_seats_booked,user_id,fair,j_date,booked_date,payment,status)values
- (20,1,12,850,to_date('14-01-2020','DD-MM-YYYY'),to_date('20/12/2019','DD/MM/YYYY'),850,'cancelled');
- insert into ticket_booking(travel_id,no_of_seats_booked,user_id,fair,j_date,booked_date,payment,status)values
- (30,1,13,750,to_date('14-01-2020','DD-MM-YYYY'),to_date('15/12/2019','DD/MM/YYYY'),700,'booked');
+ insert into booking(book_id,user_id,bus_num,user_gender,seat_no,booked_date,gender_preferences,amount,status) values(booked_id.nxetval,1,'F',1,to_date('10/12/2019','DD/MM/YYYY'),'yes',800,'BOOKED');
+ insert into booking(book_id,user_id,bus_num,user_gender,seat_no,booked_date,gender_preferences,amount,status) values(booked_id.nxetval,2,'F',1,to_date('10/12/2019','DD/MM/YYYY'),'yes',800,'BOOKED');
  ```
  query:
  ```sql
