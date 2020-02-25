@@ -18,9 +18,12 @@ create table buslist
  );
  ```
  ```sql
- insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(101,'TAT',40,'seater');
- insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(102,'VTAT',50,'sleeper');
- insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(103,'AVK',60,'seater');
+ insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(101,'TAT',10,'seater');
+ insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(102,'VTAT',10,'sleeper');
+ insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(103,'TVS',10,'seater');
+ insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(104,'ABB',10,'seater');
+ insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(105,'AVS',10,'seater');
+ insert into buslist(bus_num,bus_name,no_of_seats,seat_type)values(106,'AKV',10,'seater');
  ```
 ```sql
 Query:
@@ -29,30 +32,26 @@ Query:
  ```sql
 | bus_num | bus_name | no_of_seats | seat_type |
 |---------|----------|-------------|-----------|
-| 101     | TAT      | 40          | seater    |
-| 102     | VTAT     | 50          | sleeper   |
+| 101     | TAT      | 10          | seater    |
+| 102     | VTAT     | 10          | sleeper   |
 ```
  
   ### feature 2:list all the busroutes
 ```sql
-create table busroutes
 (
 route_no number not null,
 from_location varchar2(50) not null,
 to_location varchar2(50) not null,
-j_date date not null,
-bus_num number not null,
-constraint bus_num_fk foreign key(bus_num)references buslist(bus_num),
-constraint route_no_pk primary key(route_no)
+constraint route_no_pkk primary key(route_no)
 );
+ create sequence route_no_seq start with 1;
 ```
 ```sql
-
-insert into busroutes(route_no,from_location,to_location,j_date,bus_num)values(1,'chennai','kovilpatti',to_date('12/12/2019','DD/MM/YYYY'),101);
-insert into busroutes(route_no,from_location,to_location,j_date,bus_num)values(2,'chennai','kovilpatti',to_date('12/12/2019','DD/MM/YYYY'),102);
-insert into busroutes(route_no,from_location,to_location,j_date,bus_num)values(3,'chennai','kovilpatti',to_date('12/12/2019','DD/MM/YYYY'),103);
-insert into busroutes(route_no,from_location,to_location,j_date,bus_num)values(4,'chennai','kovilpatti',to_date('12/12/2019','DD/MM/YYYY'),104);
-insert into busroutes(route_no,from_location,to_location,j_date,bus_num)values(5,'chennai','kovilpatti',to_date('12/12/2019','DD/MM/YYYY'),105);
+insert into busroutes(route_no,from_location,to_location)values(route_no_seq.nextval,'chennai','Kovilpatti');
+insert into busroutes(route_no,from_location,to_location)values(route_no_seq.nextval,'chennai','Madurai');
+insert into busroutes(route_no,from_location,to_location)values(route_no_seq.nextval,'chennai','Banglore');
+insert into busroutes(route_no,from_location,to_location)values(route_no_seq.nextval,'Trichy','Virudhunagar');
+insert into busroutes(route_no,from_location,to_location)values(route_no_seq.nextval,'Thirunelveli','Madurai');
 ```
 query:
 ```sql
@@ -66,7 +65,7 @@ select * from busroutes;
 ```
  ### Feature 3: List all the Busdetails
  ```sql
- create table busdetails
+create table busdetails
 (
 travel_id number not null,
 route_no number not null,
@@ -82,14 +81,21 @@ constraint bus_num_fk foreign key(bus_num)references buslist(bus_num),
 constraint fair_ck check(fair>0),
 constraint available_seats_ck check(available_seats>0)
 );
+ create sequence travel_id_seq start with 1 ;
 ```
 ```sql
 insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
-(10,1,101,to_date('14-01-2020','DD-MM-YYYY'),('9:10:00,pm'),('5:10:00,am'),800,20);
+(travel_id_seq.nextval,1,101,to_date('14-01-2020','DD-MM-YYYY'),('9:00:00'),('5:30:00'),900,10);
 insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
-(20,2,102,to_date('14-01-2020','DD-MM-YYYY'),('9:30:00,pm'),('6:00:00,am'),850,25);
+(travel_id_seq.nextval,2,102,to_date('14-01-2020','DD-MM-YYYY'),('9:20:00'),('6:30:00'),850,10);
 insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
-(30,3,103,to_date('14-01-2020','DD-MM-YYYY'),('10:10:00,pm'),('5:30:00,am'),750,30);
+(travel_id_seq.nextval,3,103,to_date('14-01-2020','DD-MM-YYYY'),('9:30:00'),('7:30:00'),700,10);
+insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
+(travel_id_seq.nextval,4,104,to_date('14-01-2020','DD-MM-YYYY'),('9:50:00'),('6:30:00'),800,10);
+insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
+(travel_id_seq.nextval,5,105,to_date('14-01-2020','DD-MM-YYYY'),('9:00:00'),('6:30:00'),900,10);
+insert into busdetails(travel_id,route_no,bus_num,travel_date,start_time,end_time,fair,available_seats)values
+(travel_id_seq.nextval,1,106,to_date('14-01-2020','DD-MM-YYYY'),('9:40:00'),('8:30:00'),850,10);
 ```
 query:
 ```sql
@@ -112,16 +118,18 @@ user_id number not null,
 user_name varchar2(50) not null,
 user_phn_num number(10) not null,
 user_gender varchar2(50)not null,
+password varchar2(8) not null,
 constraint user_id_pk primary key(user_id),
 constraint user_phn_num_uq unique(user_phn_num),
 constraint user_gender_ck check(user_gender in('M','F')),
 constraint user_phn_num_ck check(length(To_char(user_phn_num))=10)
 );
+create sequence user_id_seq start with 1;
 ```
 ```sql
-insert into user_details(user_id,user_name,user_phn_num,user_gender)values(11,'suji',9876543290,'F');
-insert into user_details(user_id,user_name,user_phn_num,user_gender)values(12,'siva',8765493243,'M');
-insert into user_details(user_id,user_name,user_phn_num,user_gender)values(13,'nivi',7896547895,'F');
+insert into user_details(user_id,user_name,user_phn_num,user_gender)values(user_id_seq.nextval,'suji',9876543290,'F','suji1234');
+insert into user_details(user_id,user_name,user_phn_num,user_gender)values(user_id_seq.nextval,'siva',8765493243,'M','siva1234');
+insert into user_details(user_id,user_name,user_phn_num,user_gender)values(user_id_seq.nextval,'nivi',7896547895,'F','nivi1234');
 ```
 query:
 ```sql
@@ -135,24 +143,28 @@ drop table user_details;
 | 11      | suji      | 9876543290   | F           |
 | 12      | siva      | 8765493243   | M           |
 ```
-### Feature 5:Ticket booking
+### Feature 5:Booking
 ```sql
-
- create table ticket_booking
- (
- travel_id number not null,
- no_of_seats_booked number not null,
- user_id number not null,
- fair number not null,
- j_date date not null,
- booked_date date not null,
- payment number not null,
- status varchar2(50) not null,
- constraint travel_id_fk foreign key(travel_id)references busdetails(travel_id),
- constraint booked_date_ckk check(j_date>=booked_date),
- constraint status_ckk check(status in('booked','cancelled')),
- constraint payment_ck check(payment>0)
-  );
+ create table booking
+(
+booking_id number not null,
+user_id number not null,
+bus_num number not null,
+user_gender varchar2(50)not null,
+seat_no number not null,
+booked_date date not null,
+created_date  timestamp default systimestamp ,
+gender_preferences varchar2(50) not null,
+amount number not null,
+status varchar2(50) default 'BOOKED',
+constraint booking_id_pk primary key(booking_id),
+constraint booking_user_idd_fk foreign key(user_id)references user_details(user_id),
+constraint booking_bus_num_fkk foreign key(bus_num)references buslist(bus_num),
+constraint booking_gender_preferences_ck check(gender_preferences in ('yes','no')),
+ constraint booking_status_ckk check(status in('BOOKED','CANCELLED')),
+ constraint booking_amount_ck check(amount>0)
+);
+create sequence booked_id start with 1;
   ```
   ```sql
  insert into ticket_booking(travel_id,no_of_seats_booked,user_id,fair,j_date,booked_date,payment,status)values
